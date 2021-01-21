@@ -1,0 +1,62 @@
+version: '3'
+
+services:
+  db:
+    image: mariadb
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    restart: always
+    volumes:
+      - db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=exampleroot
+    env_file:
+      - db.env
+
+  redis:
+    image: redis:alpine
+    restart: always
+
+  onlyoffice:
+    image: onlyoffice/documentserver
+    restart: always
+    volumes:
+      - document_data:/var/www/onlyoffice/Data
+
+  app:
+    container_name: nextcloud_app
+    build: ./nextcloud
+    restart: always
+    volumes:
+      - nextcloud:/var/www/html
+    environment:
+      - MYSQL_HOST=db
+      - REDIS_HOST=redis
+    env_file:
+      - db.env
+    depends_on:
+      - db
+      - redis
+      - onlyoffice
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - 8081:80
+    depends_on:
+      - db
+
+  web:
+    build: ./web
+    restart: always
+    ports:
+      - 8080:80
+    volumes:
+      - nextcloud:/var/www/html:ro
+    depends_on:
+      - app
+
+volumes:
+  db:
+  nextcloud:
+  document_data:
