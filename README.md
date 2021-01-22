@@ -9,7 +9,7 @@ phpmyadmin at 8081
 
 # Table of Contents
 1. [Setup](#setup)
-2. [Backup and Restore](##backup-and-restore)
+2. [Backup and Restore](#backup-and-restore)
 
 # Setup
 ## Docker Compose
