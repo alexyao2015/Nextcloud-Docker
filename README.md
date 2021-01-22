@@ -89,7 +89,7 @@ Change
 
 ```bash
 docker exec -u www-data nextcloud_app php occ maintenance:mode --on
-docker run --rm -v nextcloud_nextcloud:/data -v ${PWD}:/backup alpine tar zcvf /backup/backup.tar.gz /data > /dev/null 2>&1
+docker run --rm -v nextcloud_nextcloud:/data -v ${PWD}:/backup ghcr.io/alexyao2015/alpine-mariadb-client tar zcvf /backup/backup.tar.gz /data > /dev/null 2>&1
 docker exec -u www-data nextcloud_app php occ maintenance:mode --off
 ```
 
@@ -97,7 +97,7 @@ docker exec -u www-data nextcloud_app php occ maintenance:mode --off
 
 ```bash
 docker exec -u www-data nextcloud_app php occ maintenance:mode --on
-docker run --rm -v nextcloud_nextcloud:/data -v ${PWD}:/backup alpine sh -c \
+docker run --rm -v nextcloud_nextcloud:/data -v ${PWD}:/backup ghcr.io/alexyao2015/alpine-mariadb-client sh -c \
 "rm -rf /data/* ; \
 tar zxvf /backup/backup.tar.gz --strip 1 -C /data;"
 docker exec -u www-data nextcloud_app php occ maintenance:mode --off
@@ -105,7 +105,7 @@ docker exec -u www-data nextcloud_app php occ maintenance:mode --off
 
 ## DB
 
-TODO: Build alpine with mariadb-client instead of installing each time
+TODO: Build ghcr.io/alexyao2015/alpine-mariadb-client with mariadb-client instead of installing each time
 
 Username and password defaults to `nextcloud` and `example`
 
@@ -118,7 +118,7 @@ Change
 ### Backup
 ```bash
 docker exec -u www-data nextcloud_app php occ maintenance:mode --on
-docker run --rm --network nextcloud_default -v ${PWD}:/backup alpine sh -c \
+docker run --rm --network nextcloud_default -v ${PWD}:/backup ghcr.io/alexyao2015/alpine-mariadb-client sh -c \
 "apk add mariadb-client ; \
 mysqldump --single-transaction -h db -u [username] -p[password] nextcloud > /backup/nextcloud-sqlbkp.bak;"
 docker exec -u www-data nextcloud_app php occ maintenance:mode --off
@@ -127,7 +127,7 @@ docker exec -u www-data nextcloud_app php occ maintenance:mode --off
 ### Restore
 ```bash
 docker exec -u www-data nextcloud_app php occ maintenance:mode --on
-docker run --rm --network nextcloud_default -v ${PWD}:/backup alpine sh -c \
+docker run --rm --network nextcloud_default -v ${PWD}:/backup ghcr.io/alexyao2015/alpine-mariadb-client sh -c \
 "apk add mariadb-client ; \
 mysql -h db -u [username] -p[password] -e \"DROP DATABASE nextcloud\" ; \
 mysql -h db -u [username] -p[password] -e \"CREATE DATABASE nextcloud\" ; \
@@ -148,7 +148,7 @@ Change
 
 ```bash
 docker exec -u www-data nextcloud_app php occ maintenance:mode --on
-docker run --rm --network nextcloud_default -v nextcloud_nextcloud:/data -v ${PWD}:/backup alpine sh -c \
+docker run --rm --network nextcloud_default -v nextcloud_nextcloud:/data -v ${PWD}:/backup ghcr.io/alexyao2015/alpine-mariadb-client sh -c \
 "apk add mariadb-client ; \
 mysqldump --single-transaction -h db -u [username] -p[password] nextcloud > /data/nextcloud-sqlbkp.bak ; \
 tar zcvf /backup/backup.tar.gz /data ; \
@@ -161,7 +161,7 @@ docker exec -u www-data nextcloud_app php occ maintenance:mode --off
 
 ```bash
 docker exec -u www-data nextcloud_app php occ maintenance:mode --on
-docker run --rm --network nextcloud_default -v nextcloud_nextcloud:/data -v ${PWD}:/backup alpine sh -c \
+docker run --rm --network nextcloud_default -v nextcloud_nextcloud:/data -v ${PWD}:/backup ghcr.io/alexyao2015/alpine-mariadb-client sh -c \
 "rm -rf /data/* ; \
 tar zxvf /backup/backup.tar.gz --strip 1 -C /data ; \
 apk add mariadb-client ; mysql -h db -u [username] -p[password] -e \"DROP DATABASE nextcloud\" ; \
