@@ -8,7 +8,7 @@ services:
     volumes:
       - db:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=exampleroot
+      - MYSQL_ROOT_PASSWORD=example
     env_file:
       - db.env
 
@@ -21,6 +21,23 @@ services:
     restart: always
     volumes:
       - document_data:/var/www/onlyoffice/Data
+
+  collabora:
+    image: collabora/code
+    restart: always
+    ports:
+      - 9980:9980
+    environment:
+      # Escape . (i.e. simply prefix all . with \\)
+      # Below is sub.example.com
+      # Required for trusted access
+      - domain=sub\\.example\\.com
+      - username=admin
+      - password=password
+      # Disable if not using ssl
+      - "extra_params=--o:ssl.enable=false --o:ssl.termination=true"
+      # Enable if not using ssl
+      # - "extra_params=--o:ssl.enable=false"
 
   app:
     container_name: nextcloud_app
@@ -37,6 +54,7 @@ services:
       - db
       - redis
       - onlyoffice
+      - collabora
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
