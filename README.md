@@ -60,7 +60,7 @@ All volumes denoted with `-v` and networks `--network` are prefixed by the paren
 Find the prefix by checking the name or looking in `docker volume` and `docker network`
 
 
-Better naming : \`date +"%Y%m%d"\`
+Better naming : \`date +"%Y.%m.%d-%H.%M.%S"\`
 
 
 ## Nextcloud
