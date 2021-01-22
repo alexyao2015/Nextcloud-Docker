@@ -2,9 +2,12 @@ version: '3'
 
 services:
   db:
+    container_name: nextcloud_db
     image: mariadb
     command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
     restart: always
+    networks:
+      - default
     volumes:
       - db:/var/lib/mysql
     environment:
@@ -15,16 +18,20 @@ services:
   redis:
     image: redis:alpine
     restart: always
+    networks:
+      - default
 
   onlyoffice:
     image: onlyoffice/documentserver
     restart: always
-    volumes:
-      - document_data:/var/www/onlyoffice/Data
+    networks:
+      - default
 
   collabora:
     image: collabora/code
     restart: always
+    networks:
+      - default
     environment:
       # Escape . (i.e. simply prefix all . with \\)
       # Below is sub.example.com
@@ -41,6 +48,8 @@ services:
     container_name: nextcloud_app
     build: ./nextcloud
     restart: always
+    networks:
+      - default
     volumes:
       - nextcloud:/var/www/html
     environment:
@@ -57,6 +66,8 @@ services:
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     restart: always
+    networks:
+      - default
     ports:
       - 8081:80
     depends_on:
@@ -65,6 +76,8 @@ services:
   web:
     build: ./web
     restart: always
+    networks:
+      - default
     ports:
       - 8080:80
     volumes:
@@ -75,4 +88,6 @@ services:
 volumes:
   db:
   nextcloud:
-  document_data:
+
+networks:
+  default:
