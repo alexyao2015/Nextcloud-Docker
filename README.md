@@ -7,6 +7,10 @@ Onlyoffice at 8080/onlyoffice
 Collabora at 8080
 phpmyadmin at 8081
 
+# Table of Contents
+1. [Setup](#setup)
+2. [Backup and Restore](##backup-and-restore)
+
 # Setup
 ## Docker Compose
 
