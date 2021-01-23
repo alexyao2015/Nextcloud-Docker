@@ -2,10 +2,10 @@
 
 Starts up Nextcloud with Redis, Mariadb, Nginx, OnlyOffice, Collabora
 
-Nextcloud on port 8080
-Onlyoffice at 8080/onlyoffice
-Collabora at 8080
-phpmyadmin at 8081
+- Nextcloud on port 8080
+- Onlyoffice at 8080/onlyoffice
+- Collabora at 8080
+- phpmyadmin at 8081
 
 # Table of Contents
 1. [Setup](#setup)
