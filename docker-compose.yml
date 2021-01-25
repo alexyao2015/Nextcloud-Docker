@@ -10,6 +10,7 @@ services:
       - default
     volumes:
       - db:/var/lib/mysql
+      - ./sqlcache.cnf:/etc/mysql/conf.d/sqlcache.cnf
     environment:
       - MYSQL_ROOT_PASSWORD=example
     env_file:
@@ -51,7 +52,8 @@ services:
     networks:
       - default
     volumes:
-      - nextcloud:/var/www/html
+      - ./nextcloud/php.ini:/usr/local/etc/php/conf.d/memory-limit.ini
+      - ./nextcloud/www.conf:/usr/local/etc/php-fpm.d/www.conf
     environment:
       - MYSQL_HOST=db
       - REDIS_HOST=redis
