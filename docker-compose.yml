@@ -52,7 +52,7 @@ services:
     networks:
       - default
     volumes:
-      - ./nextcloud/php.ini:/usr/local/etc/php/conf.d/memory-limit.ini
+      - ./nextcloud/memory-limit.ini:/usr/local/etc/php/conf.d/memory-limit.ini
       - ./nextcloud/www.conf:/usr/local/etc/php-fpm.d/www.conf
     environment:
       - MYSQL_HOST=db

@@ -45,7 +45,7 @@ RUN mkdir -p \
 ;
 
 COPY supervisord.conf /
-RUN mv /usr/local/etc/php-fpm.d/php.ini-production /usr/local/etc/php-fpm.d/php.ini
+RUN mv /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
 
 ENV NEXTCLOUD_UPDATE=1
 
