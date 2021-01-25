@@ -1,3 +1,5 @@
 [mysqld]
 query_cache_type = 0
 query_cache_size = 0
+innodb_buffer_pool_size=512M
+innodb_io_capacity=4000
