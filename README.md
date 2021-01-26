@@ -1,3 +1,6 @@
+<a href="https://github.com/alexyao2015/Nextcloud-Docker/actions"><img alt="GitHub Actions Build" src="https://github.com/alexyao2015/Nextcloud-Docker/workflows/Deploy/badge.svg"></a>
+<a href="https://hub.docker.com/r/yaoa/nextcloud"><img alt="Docker Pulls" src="https://img.shields.io/docker/pulls/yaoa/nextcloud.svg"></a>
+
 # Nextcloud Docker Compose
 
 Starts up Nextcloud with Redis, Mariadb, Nginx, OnlyOffice, Collabora
