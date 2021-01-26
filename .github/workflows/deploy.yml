@@ -75,7 +75,7 @@ jobs:
           docker tag ${DOCKER_IMAGE_NAME} ${DOCKER_REPO}:$GITHUB_RUN_NUMBER
           docker push ${DOCKER_REPO}:$GITHUB_RUN_NUMBER
       - name: Deploy Latest
-        if: ${{ github.head_ref == '' && github.ref == 'refs/heads/master' }}
+        if: ${{ github.head_ref == '' && github.ref == 'refs/heads/main' }}
         run: |
           docker tag ${DOCKER_IMAGE_NAME} ${DOCKER_REPO}:latest
           docker push ${DOCKER_REPO}:latest
