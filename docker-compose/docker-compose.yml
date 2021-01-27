@@ -53,6 +53,7 @@ services:
       - default
     volumes:
       - nextcloud:/var/www/html
+      - nextcloud_data:/var/www/html/data
       - ./config/memory-limit.ini:/usr/local/etc/php/conf.d/memory-limit.ini
       - ./config/www.conf:/usr/local/etc/php-fpm.d/www.conf
     environment:
@@ -92,6 +93,7 @@ services:
 volumes:
   db:
   nextcloud:
+  nextcloud_data:
 
 networks:
   default:
