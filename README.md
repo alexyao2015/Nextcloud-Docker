@@ -122,8 +122,7 @@ Change
 ```bash
 docker exec -u www-data nextcloud_app php occ maintenance:mode --on
 docker run --rm --network nextcloud_default -v ${PWD}:/backup ghcr.io/alexyao2015/alpine-mariadb-client sh -c \
-"apk add mariadb-client ; \
-mysqldump --single-transaction -h db -u [username] -p[password] nextcloud > /backup/nextcloud-sqlbkp.bak;"
+"mysqldump --single-transaction -h db -u [username] -p[password] nextcloud > /backup/nextcloud-sqlbkp.bak;"
 docker exec -u www-data nextcloud_app php occ maintenance:mode --off
 ```
 
@@ -131,8 +130,7 @@ docker exec -u www-data nextcloud_app php occ maintenance:mode --off
 ```bash
 docker exec -u www-data nextcloud_app php occ maintenance:mode --on
 docker run --rm --network nextcloud_default -v ${PWD}:/backup ghcr.io/alexyao2015/alpine-mariadb-client sh -c \
-"apk add mariadb-client ; \
-mysql -h db -u [username] -p[password] -e \"DROP DATABASE nextcloud\" ; \
+"mysql -h db -u [username] -p[password] -e \"DROP DATABASE nextcloud\" ; \
 mysql -h db -u [username] -p[password] -e \"CREATE DATABASE nextcloud\" ; \
 mysql -h db -u [username] -p[password] nextcloud < /backup/nextcloud-sqlbkp.bak;"
 docker exec -u www-data nextcloud_app php occ maintenance:mode --off
@@ -152,8 +150,7 @@ Change
 ```bash
 docker exec -u www-data nextcloud_app php occ maintenance:mode --on
 docker run --rm --network nextcloud_default -v nextcloud_nextcloud:/data -v ${PWD}:/backup ghcr.io/alexyao2015/alpine-mariadb-client sh -c \
-"apk add mariadb-client ; \
-mysqldump --single-transaction -h db -u [username] -p[password] nextcloud > /data/nextcloud-sqlbkp.bak ; \
+"mysqldump --single-transaction -h db -u [username] -p[password] nextcloud > /data/nextcloud-sqlbkp.bak ; \
 tar zcvf /backup/backup.tar.gz /data ; \
 rm /data/nextcloud-sqlbkp.bak;" \
 > /dev/null 2>&1
@@ -167,7 +164,7 @@ docker exec -u www-data nextcloud_app php occ maintenance:mode --on
 docker run --rm --network nextcloud_default -v nextcloud_nextcloud:/data -v ${PWD}:/backup ghcr.io/alexyao2015/alpine-mariadb-client sh -c \
 "rm -rf /data/* ; \
 tar zxvf /backup/backup.tar.gz --strip 1 -C /data ; \
-apk add mariadb-client ; mysql -h db -u [username] -p[password] -e \"DROP DATABASE nextcloud\" ; \
+mysql -h db -u [username] -p[password] -e \"DROP DATABASE nextcloud\" ; \
 mysql -h db -u [username] -p[password] -e \"CREATE DATABASE nextcloud\" ; \
 mysql -h db -u [username] -p[password] nextcloud < /data/nextcloud-sqlbkp.bak ; \
 rm /data/nextcloud-sqlbkp.bak;"
