@@ -32,6 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build]
     name: Deploy
+    if: ${{ !startsWith(github.ref, 'refs/pull/') && !startsWith(github.ref, 'refs/heads/dependabot/') }}
     strategy:
       matrix:
         registry:
